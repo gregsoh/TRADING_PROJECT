@@ -107,6 +107,8 @@ def dataProcessing(s1, s2, s3, s4):
 		for idx, row in CP.iterrows():
 			CP.at[idx,'RETURN-RF'] = row['RETURN'] - row['RF'] / 100
 			CP.at[idx,'RM-RF'] = row['MK_RETURN'] - row['RF'] / 100
+		CP = CP[['RETURN-RF','RM-RF', 'HML', 'SMB', 'LASTDATE']]
+		pandasToExcel(CP, "Step4.xlsx")
 		CP = CP[['RETURN-RF','RM-RF', 'HML', 'SMB']]
 		pandasToExcel(CP, "final.xlsx")
 	else:
@@ -114,7 +116,7 @@ def dataProcessing(s1, s2, s3, s4):
 	return CP.dropna()
 
 def processing():
-	data = dataProcessing(0, 0, 0, 0)
+	data = dataProcessing(0, 0, 0, 1)
 	k = data.values
 	f = k[:, 1:]
 	p = k[:, 0:1]
